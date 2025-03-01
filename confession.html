@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Confession</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            overflow: hidden;
+        }
+
+        .login-container, .confession-container {
+            position: absolute;
+            width: 300px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .confession-container {
+            opacity: 0;
+            transform: translateY(30px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background: #ff4f70;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #ff2f5a;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Heart Regenerating Effect */
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: red;
+            transform: rotate(-45deg) scale(0);
+            animation: regenerateHeart 3s ease-in-out forwards;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 50px;
+            top: 0;
+        }
+
+        @keyframes regenerateHeart {
+            0% { transform: rotate(-45deg) scale(0); opacity: 0; }
+            50% { transform: rotate(-45deg) scale(0.5); opacity: 0.5; }
+            100% { transform: rotate(-45deg) scale(1); opacity: 1; }
+        }
+
+        /* Paper Effect for Confession Message */
+        .paper {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 350px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInPaper 2s ease-in-out forwards 3s;
+        }
+
+        @keyframes fadeInPaper {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .confession-text {
+            font-size: 13px;
+            font-weight: bold;
+            color: black;
+            text-align: left;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Page -->
+    <div class="login-container" id="loginBox">
+        <h2>Login</h2>
+        <input type="text" class="input-field" id="username" placeholder="Enter your name">
+        <input type="password" class="input-field" id="password" placeholder="Enter password">
+        <button class="login-btn" onclick="login()">Login</button>
+    </div>
+
+    <!-- Confession Page -->
+    <div class="confession-container hidden" id="confessionBox">
+        <div class="heart"></div>
+        <div class="paper">
+            <p class="confession-text">
+               Hi Rijen,
+
+             Gusto ko lang sabihin na matagal na kitang crush. Nagsimula yun noong sinundo mo yung kaklase kong babae sa room namin noong Grade 9. Hindi ko akalaing magiging magkaklase tayo sa Grade 10, at dahil doon, mas lalo kitang nagustuhan.
+             Ang bait mo kasi, kahit may konting taray ka minsan. Ikaw rin yung unang babae na napaamin ako na may crush ako. Kaya ngayon, naglakas-loob na akong sabihin ito sa’yo.
+             Ayun lang, gusto ko lang malaman mo.
+
+             - from me
+
+            </p>
+        </div>
+    </div>
+  
+    <script>
+        function login() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (username.trim() !== "" && password.trim() !== "") {
+                document.getElementById("loginBox").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("loginBox").classList.add("hidden");
+                    document.getElementById("confessionBox").classList.remove("hidden");
+                    document.getElementById("confessionBox").style.opacity = "1";
+                }, 500);
+            } else {
+                alert("Please enter a valid name and password!");
+            }
+        }
+    </script>
+
+</body>
+</html>
